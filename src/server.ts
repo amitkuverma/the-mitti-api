@@ -1,30 +1,14 @@
-import express from "express";
-import http from "http";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import compression from "compression";
-import cors from "cors";
+import app from "./app";
 import * as connection from "./commons/MongodbConnection";
-import router from "./router"
-import rout from './app'
 
-const port = process.env.PORT || 4000
-const app = express();
+const PORT = process.env.PORT || 4000
 
-app.use(cors({
-    credentials: true
-}));
-app.use(compression());
-app.use(cookieParser());
-app.use(bodyParser.json());
+app.set('port', PORT)
 
 
-const server = http.createServer(app);
-
-server.listen(port, () => {
+const server = app.listen(PORT, () => {
     new connection.MongodbConnection().DbConnect();
-    console.log("server is running on port http://localhost:" + port)
+    console.log("server is running on port http://localhost:" + PORT)
 })
 
-app.use(rout);
-app.use('/', router())
+server.timeout = 300000;
