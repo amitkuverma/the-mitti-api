@@ -14,31 +14,31 @@ class App {
         this.config();
 
         var whitelist = ['https://the-mitti.onrender.com/', 'http://localhost:3000/']
-        var corsOptions = {
-            origin: function (origin:any, callback:any) {
-                if (whitelist.indexOf(origin) !== -1) {
-                    callback(null, true)
-                } else {
-                    callback(new Error('Not allowed by CORS'))
-                }
-            }
-        }
+        // var corsOptions = {
+        //     origin: function (origin:any, callback:any) {
+        //         if (whitelist.indexOf(origin) !== -1) {
+        //             callback(null, true)
+        //         } else {
+        //             callback(new Error('Not allowed by CORS'))
+        //         }
+        //     }
+        // }
         // if (false) {
         this.app.use(cors({ origin: true, credentials: true }));
         // } else {
-        //     const whitelist = ['https://the-mitti.onrender.com/'];
-        //     const corsOptions = {
-        //         origin: function (origin: any, callback: any) {
-        //             if (whitelist.indexOf(origin) !== -1) {
-        //                 callback(null, true)
-        //             } else {
-        //                 callback(new Error('Not allowed by CORS'))
-        //             }
-        //         },
-        //         methods: "GET,HEAD,PUT,PATCH,POST",
-        //         optionsSuccessStatus: 200
-        //     }
-        //     this.app.use(cors());
+            // const whitelist = ['https://the-mitti.onrender.com/'];
+            const corsOptions = {
+                origin: function (origin: any, callback: any) {
+                    if (whitelist.indexOf(origin) !== -1) {
+                        callback(null, true)
+                    } else {
+                        callback(new Error('Not allowed by CORS'))
+                    }
+                },
+                methods: "GET,HEAD,PUT,PATCH,POST",
+                optionsSuccessStatus: 200
+            }
+            this.app.use(cors(corsOptions));
         // }
         this.routePrv.routes(this.app)
 
