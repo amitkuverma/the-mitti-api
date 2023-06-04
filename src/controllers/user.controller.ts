@@ -29,7 +29,6 @@ export class UserController {
                     inserted_date: user.inserted_date
                 }
                 var token = jwt.sign(payload, random(),{ expiresIn: 60 * 60 });
-        
                 const response = {
                     message: "Login successfull !!!",
                     token: 'Barrer ' + token,
