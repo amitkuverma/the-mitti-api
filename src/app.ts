@@ -25,7 +25,7 @@ class App {
             methods: "GET,HEAD,PUT,PATCH,POST",
             optionsSuccessStatus: 200
         }
-        this.app.use(cors(corsOptions));
+        this.app.use(cors());
         this.routePrv.routes(this.app)
 
         // process.on('unhandledRejection', (error: Error) => {
